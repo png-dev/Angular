@@ -1,24 +1,40 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Education} from './education/education';
+import {environment} from '../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EducationService {
-
-  constructor(private http: HttpClient) {
-  }
-
-  getDataEducation() {
-    const headerDict = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    }
-    const requestOptions = {
-      headers: new Headers(headerDict),
+    private educationUrl = '/api/v1/education';
+    httpOptions = {
+        headers: new HttpHeaders(
+            {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            })
     };
-    // @ts-ignore
-    return this.http.get('http://0.0.0.0:5000/api/v1/education', requestOptions)
-  }
+
+    constructor(private http: HttpClient) {
+    }
+
+    getDataEducation() {
+        return this.http.get(this.educationUrl, this.httpOptions);
+    }
+
+    updateDataEducation(education: Education): Observable<any> {
+        return this.http.put(
+            this.educationUrl + '/' + education.id, education, this.httpOptions
+        );
+    }
+
+    removeDataEducation(education: Education | string): Observable<any> {
+        const id = typeof education === 'string' ? education : education.id;
+        const url = `${this.educationUrl}/${id}`;
+        return this.http.delete<Education>(
+            url, this.httpOptions
+        );
+    }
 }

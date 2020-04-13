@@ -12,26 +12,28 @@ import {EducationComponent} from './education/education.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {HomeComponent} from './home/home.component';
 import {EducationDetailComponent} from './education-detail/education-detail.component';
+import {ModalComponent} from './modal/modal.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    EducationComponent,
-    NotFoundComponent,
-    HomeComponent,
-    EducationDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MDBBootstrapModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        EducationComponent,
+        NotFoundComponent,
+        HomeComponent,
+        EducationDetailComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MDBBootstrapModule.forRoot()
+    ],
+    entryComponents: [ModalComponent],
+    providers: [],
+    bootstrap: [AppComponent]
 
 })
 export class AppModule {

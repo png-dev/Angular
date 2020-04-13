@@ -1,41 +1,56 @@
-import {Component, } from '@angular/core';
-import {EducationService} from '../education.service'
+import {Component, OnInit} from '@angular/core';
+import {EducationService} from '../education.service';
+import {MDBModalRef, MDBModalService} from 'angular-bootstrap-md';
+import {ModalComponent} from '../modal/modal.component';
+import {Education} from './education';
 
 @Component({
-  selector: 'app-education',
-  templateUrl: './education.component.html',
-  styleUrls: ['./education.component.scss']
+    selector: 'app-education',
+    templateUrl: './education.component.html',
+    styleUrls: ['./education.component.scss']
 })
-export class EducationComponent {
-  editField: string;
-  personList: Array<any> = [
-    {id: 1, url: 'Aurelia Vega', title: 'Deepends', description: 'Spain'},
-    {id: 2, url: 'Guerra Cortez', title: 'Insectus', description: 'USA'},
-    {id: 3, url: 'Guadalupe House', title: 'Isotronic', description: 'Germany'},
-    {id: 4, url: 'Aurelia Vega', title: 'Deepends', description: 'Spain'},
-    {id: 5, url: 'Elisa Gallagher', title: 'Portica', description: 'United Kingdom'},
-    {id: 5, url: 'Elisa Gallagher', title: 'Portica', description: 'United Kingdom'},
-    {id: 5, url: 'Elisa Gallagher', title: 'Portica', description: 'United Kingdom'},
-    {id: 5, url: 'Elisa Gallagher', title: 'Portica', description: 'United Kingdom'},
-    {id: 5, url: 'Elisa Gallagher', title: 'Portica', description: 'United Kingdom'},
-    {id: 5, url: 'Elisa Gallagher', title: 'Portica', description: 'United Kingdom'},
-  ];
+export class EducationComponent implements OnInit {
+    modalRef: MDBModalRef;
 
-  constructor(
-    private educationService: EducationService,
-  ) {
-  }
+    educations: any = [];
+
+    constructor(
+        private educationService: EducationService,
+        private modalService: MDBModalService
+    ) {
+    }
 
 
-  updateEducation() {
-    console.log();
-  }
+    ngOnInit(): void {
+        this.getEducations();
+    }
 
-  remove(id: string) {
-    console.log(id);
-  }
+    async getEducations() {
+        await this.educationService.getDataEducation().subscribe((res: any) => {
+            // this.educations = JSON.stringify(res.data);
+        });
 
-  add() {
-    console.log()
-  }
+    }
+
+    updateEducation() {
+        console.log();
+    }
+
+    remove(id
+               :
+               string
+    ) {
+        console.log(id);
+    }
+
+    add() {
+        console.log();
+    }
+
+    openModal(educationId
+                  :
+                  string
+    ) {
+        this.modalRef = this.modalService.show(ModalComponent);
+    }
 }

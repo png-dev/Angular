@@ -1,43 +1,47 @@
 <div class="card">
-  <h4 class="card-header text-center font-weight-bold text-uppercase py-4">Danh sách các bài viết Express</h4>
-  <div class="card-body">
-    <div id="table" class="table-editable">
+    <h4 class="card-header text-center font-weight-bold text-uppercase py-4">Danh sách các bài viết Express</h4>
+    <div class="card-body">
+        <div id="table">
       <span class="table-add float-right mb-3 mr-2">
         <a class="text-success" (click)="add()">
           <mdb-icon fas icon="plus" size="2x"></mdb-icon>
         </a>
       </span>
-      <table class="table table-bordered table-responsive-md table-striped text-center">
-        <tr>
-          <th class="text-center">Url</th>
-          <th class="text-center">Title</th>
-          <th class="text-center">Description</th>
-          <th class="text-center"></th>
-          <th class="text-center"></th>
-        </tr>
-        <tr *ngFor="let person of personList; let id = index">
-          <td>
-            <span contenteditable="true">{{person.url}}</span>
-          </td>
-          <td>
-            <span contenteditable="true">{{person.title}}</span>
-          </td>
-          <td>
-            <span contenteditable="true">{{person.description}}</span>
-          </td>
-          <td width="5%">
-            <span class="table-update">
-              <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="remove(id)">Update</button>
-            </span>
-          </td>
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+                <tr>
+                    <th class="text-center">Url</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                </tr>
+                <tr *ngFor="let education of educations">
+                    <td width="25%">
+                        <span>{{education.url}}</span>
+                    </td>
+                    <td width="25%">
+                        <span>{{education.title}}</span>
+                    </td>
+                    <td width="40%">
+                        <span>{{education.description}}</span>
+                    </td>
+                    <td width="5%">
+                        <span class="table-update">
+                            <button type="button" mdbBtn color="blue"
+                                    [routerLink]="['/educations', education.id]"
+                                    rounded="true" size="sm"
+                                    class="my-0">Update</button>
+                        </span>
+                    </td>
 
-          <td width="5%">
-            <span class="table-remove">
-              <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(id)">Remove</button>
-            </span>
-          </td>
-        </tr>
-      </table>
+                    <td width="5%">
+                        <span class="table-remove">
+                          <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                                  (click)="openModal(education.id)">Remove</button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
