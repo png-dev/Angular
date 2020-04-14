@@ -1,12 +1,20 @@
 <div class="card">
     <h4 class="card-header text-center font-weight-bold text-uppercase py-4">Danh sách các bài viết Express</h4>
+    <form class="form-inline md-form form-sm active-cyan-2" style="margin-left: 30px">
+        <input class="form-control form-control-sm mr-3 w-75" type="text"
+               [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"
+               (keyup.enter)="searchDataEducation()"
+               placeholder="Search" aria-label="Search"
+               mdbInput>
+        <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
+    </form>
     <div class="card-body">
         <div id="table">
-      <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success">
-          <mdb-icon fas icon="plus" size="2x"></mdb-icon>
-        </a>
-      </span>
+            <span class="table-add float-right mb-3 mr-2">
+                <a class="text-success">
+                <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+            </a>
+            </span>
             <table class="table table-bordered table-responsive-md table-striped text-center">
                 <tr>
                     <th class="text-center">Url</th>
@@ -43,7 +51,14 @@
                         </span>
                     </td>
                 </tr>
+
             </table>
+            <div *ngIf="educations?.length > 0" class="pagination">
+                <a (click)="getDataByPage(false)">&laquo;</a>
+                <a>{{offset}}</a>
+                <a (click)="getDataByPage(true)">&raquo;</a>
+            </div>
         </div>
     </div>
+
 </div>

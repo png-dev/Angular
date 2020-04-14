@@ -11,26 +11,32 @@ import {Education} from './education';
 })
 export class EducationComponent implements OnInit {
     modalRef: MDBModalRef;
-
+    offset = 1;
+    limit = 10;
+    error: string;
+    searchText: string;
     educations: Education[];
 
     constructor(
         private educationService: EducationService,
-        private modalService: MDBModalService
+        private modalService: MDBModalService,
     ) {
     }
 
-
     ngOnInit(): void {
-        this.getEducations();
+        if (sessionStorage.getItem('offset')) {
+            this.offset = parseInt(sessionStorage.getItem('offset'));
+        }
+        this.getEducations(this.limit, this.offset);
     }
 
-    getEducations() {
-        this.educationService.getDataEducation().subscribe((res: any) => {
+    getEducations(limit: number, offset: number) {
+        console.log(this.searchText);
+        this.educationService.getDataEducation(limit, offset, this.searchText).subscribe((res: any) => {
             this.educations = res?.data;
 
         }, (error: any) => {
-            console.log(error);
+            this.error = error.error.message;
         });
     }
 
@@ -54,12 +60,22 @@ export class EducationComponent implements OnInit {
             if (result === true) {
                 this.educationService.removeDataEducation(educationId).subscribe((res: any) => {
                     if (res.result === 1) {
-                        this.getEducations();
+                        this.getEducations(this.limit, this.offset);
                     }
                 }, (error: any) => {
                     console.log(error);
                 });
             }
         });
+    }
+
+    getDataByPage(isIncre: boolean) {
+        isIncre ? this.offset++ : (this.offset > 1 ? this.offset-- : this.offset);
+        this.getEducations(this.limit, this.offset);
+        sessionStorage.setItem('offset', this.offset.toString());
+    }
+
+    searchDataEducation() {
+        this.getEducations(this.limit, this.offset);
     }
 }

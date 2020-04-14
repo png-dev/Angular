@@ -14,6 +14,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {HomeComponent} from './home/home.component';
 import {EducationDetailComponent} from './education-detail/education-detail.component';
 import {ModalComponent} from './modal/modal.component';
+import { FilterEducationPipe } from './filter-education.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {ModalComponent} from './modal/modal.component';
         EducationComponent,
         NotFoundComponent,
         HomeComponent,
-        EducationDetailComponent
+        EducationDetailComponent,
+        FilterEducationPipe
     ],
     imports: [
         BrowserModule,
