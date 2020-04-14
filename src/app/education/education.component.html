@@ -3,7 +3,7 @@
     <div class="card-body">
         <div id="table">
       <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="add()">
+        <a class="text-success">
           <mdb-icon fas icon="plus" size="2x"></mdb-icon>
         </a>
       </span>
@@ -17,7 +17,9 @@
                 </tr>
                 <tr *ngFor="let education of educations">
                     <td width="25%">
-                        <span>{{education.url}}</span>
+                        <a class="portfolio-box" href={{education.url}} target="_blank">
+                            <span>{{education.url}}</span>
+                        </a>
                     </td>
                     <td width="25%">
                         <span>{{education.title}}</span>
@@ -25,7 +27,7 @@
                     <td width="40%">
                         <span>{{education.description}}</span>
                     </td>
-                    <td width="5%">
+                    <td width="2%">
                         <span class="table-update">
                             <button type="button" mdbBtn color="blue"
                                     [routerLink]="['/educations', education.id]"
@@ -34,7 +36,7 @@
                         </span>
                     </td>
 
-                    <td width="5%">
+                    <td width="2%">
                         <span class="table-remove">
                           <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
                                   (click)="openModal(education.id)">Remove</button>

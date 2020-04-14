@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Education} from './education/education';
-import {environment} from '../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +21,11 @@ export class EducationService {
 
     getDataEducation() {
         return this.http.get(this.educationUrl, this.httpOptions);
+    }
+
+    getDataEducationDetail(id: string) {
+        const urlEdu = this.educationUrl + '/' + id;
+        return this.http.get(urlEdu, this.httpOptions);
     }
 
     updateDataEducation(education: Education): Observable<any> {

@@ -12,7 +12,7 @@ import {Education} from './education';
 export class EducationComponent implements OnInit {
     modalRef: MDBModalRef;
 
-    educations: any = [];
+    educations: Education[];
 
     constructor(
         private educationService: EducationService,
@@ -25,32 +25,41 @@ export class EducationComponent implements OnInit {
         this.getEducations();
     }
 
-    async getEducations() {
-        await this.educationService.getDataEducation().subscribe((res: any) => {
-            // this.educations = JSON.stringify(res.data);
+    getEducations() {
+        this.educationService.getDataEducation().subscribe((res: any) => {
+            this.educations = res?.data;
+
+        }, (error: any) => {
+            console.log(error);
         });
-
     }
 
-    updateEducation() {
-        console.log();
-    }
-
-    remove(id
-               :
-               string
-    ) {
-        console.log(id);
-    }
-
-    add() {
-        console.log();
-    }
-
-    openModal(educationId
-                  :
-                  string
-    ) {
-        this.modalRef = this.modalService.show(ModalComponent);
+    openModal(educationId: string) {
+        this.modalRef = this.modalService.show(ModalComponent,
+            {
+                backdrop: true,
+                keyboard: true,
+                focus: true,
+                show: false,
+                ignoreBackdropClick: false,
+                class: '',
+                containerClass: '',
+                animated: true,
+                data: {
+                    heading: 'Bạn có chắc chắn muốn xóa ?',
+                    content: {heading: '', description: ''}
+                }
+            });
+        this.modalRef.content.action.subscribe((result: any) => {
+            if (result === true) {
+                this.educationService.removeDataEducation(educationId).subscribe((res: any) => {
+                    if (res.result === 1) {
+                        this.getEducations();
+                    }
+                }, (error: any) => {
+                    console.log(error);
+                });
+            }
+        });
     }
 }

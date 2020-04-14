@@ -7,20 +7,17 @@
     </mdb-card-header>
     <mdb-card-body class="px-lg-5 pt-0">
 
-        <form class="text-center" style="color: #757575;">
-
+        <form *ngIf="education" class="text-center" style="color: #757575;">
             <div class="md-form">
-                <input type="text" id="url_id" class="form-control"
-                       aria-describedby="materialRegisterFormPasswordHelpBlock"
-                       mdbInput>
-                <label for="url_id">Url</label>
-                <small id="small_url_id" class="form-text text-muted mb-4">
-                    Không được để trống
-                </small>
+                <a id="url_id" href={{education.url}} target="_blank">
+                    <span>{{education.url}}</span>
+                </a>
+
             </div>
 
             <div class="md-form">
-                <input type="text" id="title_id" class="form-control"
+                <input type="text" id="title_id" class="form-control" value="{{education.title}}"
+                       [(ngModel)]="education.title" [ngModelOptions]="{standalone: true}"
                        aria-describedby="materialRegisterFormPasswordHelpBlock"
                        mdbInput>
                 <label for="title_id">Title</label>
@@ -29,8 +26,10 @@
                 </small>
             </div>
 
+
             <div class="md-form">
-                <input type="text" id="description_id" class="form-control"
+                <input type="text" id="description_id" class="form-control" value="{{education.description}}"
+                       [(ngModel)]="education.description" [ngModelOptions]="{standalone: true}"
                        aria-describedby="materialRegisterFormPasswordHelpBlock"
                        mdbInput>
                 <label for="description_id">Description</label>
@@ -39,7 +38,15 @@
                 </small>
             </div>
 
-            <button mdbBtn type="button" color="primary" class="waves-light" mdbWavesEffect>Cập nhật</button>
+            <button mdbBtn type="button"
+                    (click)="goBack()"
+                    color="primary" class="waves-light" mdbWavesEffect>Quay lại
+            </button>
+
+            <button mdbBtn type="button"
+                    (click)="updateEducation(education)"
+                    color="primary" class="waves-light" mdbWavesEffect>Cập nhật
+            </button>
 
 
         </form>
