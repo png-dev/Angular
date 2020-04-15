@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {EducationService} from '../education.service';
 import {Education} from '../education/education';
@@ -10,13 +10,13 @@ import {Location} from '@angular/common';
     templateUrl: './education-detail.component.html',
     styleUrls: ['./education-detail.component.scss']
 })
-export class EducationDetailComponent implements OnInit, OnDestroy {
+export class EducationDetailComponent implements OnInit {
     @Input() education: Education;
     error = '';
 
     constructor(
         private educationService: EducationService,
-        private route: ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
         private location: Location,
     ) {
     }
@@ -25,12 +25,8 @@ export class EducationDetailComponent implements OnInit, OnDestroy {
         this.getDataEducationDetail();
     }
 
-    ngOnDestroy() {
-        sessionStorage.removeItem('offset');
-    }
-
     getDataEducationDetail() {
-        const id = this.route.snapshot.paramMap.get('education_id');
+        const id = this.activatedRoute.snapshot.paramMap.get('education_id');
         this.educationService.getDataEducationDetail(id)
             .subscribe((res: any) => {
                 this.education = res?.data;
@@ -44,8 +40,7 @@ export class EducationDetailComponent implements OnInit, OnDestroy {
     updateEducation(education) {
         this.educationService.updateDataEducation(education).subscribe((res: any) => {
             if (res?.result === 1) {
-                this.location.go('/educations');
-                window.location.reload();
+                this.goBack();
             }
         }, (error: any) => {
             if (error.status === 400) {

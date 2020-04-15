@@ -58,7 +58,7 @@
             </table>
             <div *ngIf="educations?.length > 0" class="pagination">
                 <a (click)="getDataByPage(false)" [hidden]="offset==1">&laquo;</a>
-                <a>{{offset}}</a>
+                <a [hidden]="educations.length <10">{{offset}}</a>
                 <a (click)="getDataByPage(true)" [hidden]="educations.length <10">&raquo;</a>
             </div>
         </div>

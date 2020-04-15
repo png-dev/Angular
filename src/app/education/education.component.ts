@@ -3,6 +3,8 @@ import {EducationService} from '../education.service';
 import {MDBModalRef, MDBModalService} from 'angular-bootstrap-md';
 import {ModalComponent} from '../modal/modal.component';
 import {Education} from './education';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'app-education',
@@ -20,14 +22,17 @@ export class EducationComponent implements OnInit {
     constructor(
         private educationService: EducationService,
         private modalService: MDBModalService,
+        private activatedRoute: ActivatedRoute,
+        private location: Location,
     ) {
     }
 
     ngOnInit(): void {
-        if (sessionStorage.getItem('offset')) {
-            this.offset = parseInt(sessionStorage.getItem('offset'));
-        }
-        this.getEducations(this.limit, this.offset);
+        this.activatedRoute.queryParams.subscribe(params => {
+            this.limit = params?.limit || 10;
+            this.offset = params?.offset || 1;
+            this.getEducations(this.limit, this.offset);
+        });
     }
 
     getEducations(limit: number, offset: number) {
@@ -70,12 +75,13 @@ export class EducationComponent implements OnInit {
 
     getDataByPage(isIncre: boolean) {
         isIncre ? this.offset++ : (this.offset > 1 ? this.offset-- : this.offset);
+        this.location.go('educations', `limit=${this.limit}&offset=${this.offset}`);
         this.getEducations(this.limit, this.offset);
-        sessionStorage.setItem('offset', this.offset.toString());
     }
 
     searchDataEducation() {
         this.offset = 1;
+        this.location.go('educations', `limit=${this.limit}&offset=${this.offset}`);
         this.getEducations(this.limit, this.offset);
     }
 
