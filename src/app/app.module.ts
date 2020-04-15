@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
@@ -14,7 +13,9 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {HomeComponent} from './home/home.component';
 import {EducationDetailComponent} from './education-detail/education-detail.component';
 import {ModalComponent} from './modal/modal.component';
-import { FilterEducationPipe } from './filter-education.pipe';
+import {FilterEducationPipe} from './filter-education.pipe';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 
 @NgModule({
@@ -26,14 +27,16 @@ import { FilterEducationPipe } from './filter-education.pipe';
         NotFoundComponent,
         HomeComponent,
         EducationDetailComponent,
-        FilterEducationPipe
+        FilterEducationPipe,
+        SnackBarComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        MDBBootstrapModule.forRoot()
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule
     ],
     entryComponents: [ModalComponent],
     providers: [],

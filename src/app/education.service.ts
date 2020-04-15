@@ -22,7 +22,6 @@ export class EducationService {
 
     getDataEducation(limit: number, offset: number, query: string) {
         const url = this.educationUrl + `?limit=${limit}&offset=${offset}` + (query ? `&query=${query}` : '');
-        console.log(url);
         return this.http.get(url, this.httpOptions);
     }
 
@@ -33,7 +32,7 @@ export class EducationService {
 
     updateDataEducation(education: Education): Observable<any> {
         return this.http.put(
-            this.educationUrl + education.id, education, this.httpOptions
+            this.educationUrl, education, this.httpOptions
         );
     }
 

@@ -3,17 +3,17 @@
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">{{ heading }}</h4>
+        <h5  id="myModalLabel">{{ heading }}</h5>
     </div>
     <div class="modal-body">
-        <h5>{{ content.heading }}</h5>
+        <label>{{ content.heading }}</label>
         <p>{{ content.description }}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="onNoClick()"
+        <button type="button" style="background-color: #e7e7e7; color: black;" (click)="onNoClick()"
                 mdbWavesEffect>Hủy yêu cầu
         </button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="onYesClick()" mdbWavesEffect>
+        <button type="button" style="background-color: #008CBA; color: white" (click)="onYesClick()" mdbWavesEffect>
             Xác nhận
         </button>
     </div>

@@ -31,7 +31,6 @@ export class EducationComponent implements OnInit {
     }
 
     getEducations(limit: number, offset: number) {
-        console.log(this.searchText);
         this.educationService.getDataEducation(limit, offset, this.searchText).subscribe((res: any) => {
             this.educations = res?.data;
 
@@ -76,6 +75,11 @@ export class EducationComponent implements OnInit {
     }
 
     searchDataEducation() {
+        this.offset = 1;
         this.getEducations(this.limit, this.offset);
+    }
+
+    openCreateEducation() {
+        console.log('add');
     }
 }
