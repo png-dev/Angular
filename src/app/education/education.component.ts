@@ -3,8 +3,9 @@ import {EducationService} from '../education.service';
 import {MDBModalRef, MDBModalService} from 'angular-bootstrap-md';
 import {ModalComponent} from '../modal/modal.component';
 import {Education} from './education';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {query} from "@angular/animations";
 
 @Component({
     selector: 'app-education',
@@ -24,6 +25,7 @@ export class EducationComponent implements OnInit {
         private modalService: MDBModalService,
         private activatedRoute: ActivatedRoute,
         private location: Location,
+        private router: Router
     ) {
     }
 
@@ -31,6 +33,7 @@ export class EducationComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             this.limit = params?.limit || 10;
             this.offset = params?.offset || 1;
+            this.searchText = params?.query;
             this.getEducations(this.limit, this.offset);
         });
     }
@@ -42,6 +45,10 @@ export class EducationComponent implements OnInit {
         }, (error: any) => {
             this.error = error.error.message;
         });
+    }
+
+    openPageUpdateData(education: Education) {
+        this.router.navigate(['/educations', education.id],);
     }
 
     openModal(educationId: string) {
@@ -81,7 +88,11 @@ export class EducationComponent implements OnInit {
 
     searchDataEducation() {
         this.offset = 1;
-        this.location.go('educations', `limit=${this.limit}&offset=${this.offset}`);
+        let query = `limit=${this.limit}&offset=${this.offset}`;
+        if (this.searchText) {
+            query = query + `&query=${this.searchText}`;
+        }
+        this.location.go('educations', query);
         this.getEducations(this.limit, this.offset);
     }
 
