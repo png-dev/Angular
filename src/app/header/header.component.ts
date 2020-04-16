@@ -26,4 +26,8 @@ export class HeaderComponent implements OnInit {
             , {queryParams: {limit: 10, offset: 1}});
     }
 
+    openPageContact() {
+        this.router.navigate(['/contact']);
+    }
+
 }
