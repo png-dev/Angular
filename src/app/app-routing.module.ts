@@ -4,6 +4,7 @@ import {EducationComponent} from './education/education.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {HomeComponent} from './home/home.component';
 import {EducationDetailComponent} from './education-detail/education-detail.component';
+import {ContactComponent} from './contact/contact.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'educations', component: EducationComponent, data: {shouldDetach: true}},
     {path: 'educations/:education_id', component: EducationDetailComponent},
+    {path: 'contact', component: ContactComponent},
     {path: '**', component: NotFoundComponent},
 ];
 
