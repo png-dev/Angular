@@ -16,6 +16,7 @@ import {ModalComponent} from './modal/modal.component';
 import {FilterEducationPipe} from './filter-education.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
         HomeComponent,
         EducationDetailComponent,
         FilterEducationPipe,
-        SnackBarComponent
+        SnackBarComponent,
+        ContactComponent
     ],
     imports: [
         BrowserModule,

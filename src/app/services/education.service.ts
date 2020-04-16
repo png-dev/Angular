@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {Education} from './education/education';
+import {Education} from '../education/education';
 import {catchError, retry} from 'rxjs/operators';
 
 @Injectable({

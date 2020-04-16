@@ -1,8 +1,9 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {EducationService} from '../education.service';
+import {EducationService} from '../services/education.service';
 import {Education} from '../education/education';
 import {Location} from '@angular/common';
+import {SnackbarService} from '../services/snackbar.service';
 
 @Component({
     selector: 'app-education-detail',
@@ -17,6 +18,7 @@ export class EducationDetailComponent implements OnInit {
         private educationService: EducationService,
         private activatedRoute: ActivatedRoute,
         private location: Location,
+        private snackbarService: SnackbarService
     ) {
     }
 
@@ -39,6 +41,7 @@ export class EducationDetailComponent implements OnInit {
         this.educationService.updateDataEducation(education)
             .subscribe((res: any) => {
                 if (res?.result === 1) {
+                    this.snackbarService.success('Cập nhập thành công', true);
                     this.goBack();
                 }
             });

@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {EducationService} from '../education.service';
+import {EducationService} from '../services/education.service';
 import {MDBModalRef, MDBModalService} from 'angular-bootstrap-md';
 import {ModalComponent} from '../modal/modal.component';
 import {Education} from './education';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {SnackbarService} from '../services/snackbar.service';
+
 
 @Component({
     selector: 'app-education',
@@ -24,7 +26,8 @@ export class EducationComponent implements OnInit {
         private modalService: MDBModalService,
         private activatedRoute: ActivatedRoute,
         private location: Location,
-        private router: Router
+        private router: Router,
+        private snackbarService: SnackbarService
     ) {
     }
 
@@ -73,6 +76,7 @@ export class EducationComponent implements OnInit {
                         .subscribe((res: any) => {
                             if (res.result === 1) {
                                 this.getEducations(this.limit, this.offset);
+                                this.snackbarService.success('Đã xóa thành công', true);
                             }
                         });
                 }
