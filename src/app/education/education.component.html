@@ -1,14 +1,24 @@
 <div class="card">
-    <h4 class="card-header text-center font-weight-bold text-uppercase py-4">Danh sách các bài viết Express</h4>
-    <form class="form-inline md-form form-sm active-cyan-2" style="margin-left: 30px">
+
+    <h4 class="card-header text-center
+        font-weight-bold text-uppercase py-4">
+        Danh sách các bài viết Express
+    </h4>
+
+    <form class="form-inline md-form
+        form-sm active-cyan-2" style="margin-left: 30px">
+
         <input class="form-control form-control-sm mr-3 w-75" type="text"
                [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"
                (keyup.enter)="searchDataEducation()"
                placeholder="Search" aria-label="Search"
                mdbInput>
+
         <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
     </form>
+
     <div class="card-body">
+
         <div id="table">
             <span class="table-add float-right mb-3 mr-2">
                 <a class="text-success">
@@ -18,7 +28,8 @@
                     </mdb-icon>
                 </a>
             </span>
-            <table class="table table-bordered table-responsive-md table-striped text-center">
+            <table class="table table-bordered
+                table-responsive-md table-striped text-center">
                 <tr>
                     <th class="text-center">Url</th>
                     <th class="text-center">Title</th>
@@ -26,18 +37,25 @@
                     <th class="text-center"></th>
                     <th class="text-center"></th>
                 </tr>
+
                 <tr *ngFor="let education of educations">
+
                     <td width="25%">
-                        <a class="portfolio-box" href={{education.url}} target="_blank">
+                        <a class="portfolio-box"
+                            href={{education.url}} target="_blank">
+
                             <span>{{education.url}}</span>
                         </a>
                     </td>
+
                     <td width="25%">
                         <span>{{education.title}}</span>
                     </td>
+
                     <td width="40%">
                         <span>{{education.description}}</span>
                     </td>
+
                     <td width="2%">
                         <span class="table-update">
                             <button type="button" mdbBtn color="blue"
@@ -49,13 +67,15 @@
 
                     <td width="2%">
                         <span class="table-remove">
-                          <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                          <button type="button" mdbBtn color="danger"
+                                  rounded="true" size="sm" class="my-0"
                                   (click)="openModal(education.id)">Remove</button>
                         </span>
                     </td>
                 </tr>
 
             </table>
+
             <div *ngIf="educations?.length > 0" class="pagination">
                 <a (click)="getDataByPage(false)" [hidden]="offset==1">&laquo;</a>
                 <a [hidden]="educations.length < limit"> {{offset}}</a>

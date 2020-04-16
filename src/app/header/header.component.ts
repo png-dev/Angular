@@ -22,7 +22,8 @@ export class HeaderComponent implements OnInit {
     }
 
     openPageEducation() {
-        this.router.navigate(['/educations'], {queryParams: {limit: 10, offset: 1}});
+        this.router.navigate(['/educations']
+            , {queryParams: {limit: 10, offset: 1}});
     }
 
 }

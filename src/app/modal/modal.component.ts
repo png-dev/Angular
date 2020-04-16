@@ -28,5 +28,4 @@ export class ModalComponent implements OnInit {
         this.modalRef.hide();
     }
 
-
 }
