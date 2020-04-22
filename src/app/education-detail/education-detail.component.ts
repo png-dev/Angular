@@ -7,6 +7,7 @@ import {SnackbarService} from '../services/snackbar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {forbiddenTitle} from '../shared/title-validator';
 import {forbiddenDescription} from '../shared/description-validator';
+import {forbiddenFile} from '../shared/file-validator';
 
 @Component({
     selector: 'app-education-detail',
@@ -14,9 +15,11 @@ import {forbiddenDescription} from '../shared/description-validator';
     styleUrls: ['./education-detail.component.scss']
 })
 export class EducationDetailComponent implements OnInit {
-    @Input() education: Education;
+    education: Education;
     error = '';
-    form: FormGroup;
+    @Input() form: FormGroup;
+    file: File;
+    imageUrl: string | ArrayBuffer;
 
     constructor(
         private fb: FormBuilder,
@@ -28,11 +31,13 @@ export class EducationDetailComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getDataEducationDetail();
+
         this.form = this.fb.group({
             title: ['', [Validators.required, forbiddenTitle]],
             description: ['', [Validators.required, forbiddenDescription]],
+            file: ['', forbiddenFile],
         });
-        this.getDataEducationDetail();
 
     }
 
@@ -47,19 +52,35 @@ export class EducationDetailComponent implements OnInit {
             });
     }
 
+
     updateEducation(education) {
+        education.file = this.file;
         console.log(education);
-        // this.educationService.updateDataEducation(education)
-        //     .subscribe((res: any) => {
-        //         if (res?.status === 200) {
-        //             this.snackbarService.success('Cập nhập thành công', true);
-        //             this.goBack();
-        //         }
-        //     });
+        this.educationService.updateDataEducation(education)
+            .subscribe((res: any) => {
+                if (res?.status === 200) {
+                    this.snackbarService.success('Cập nhập thành công', true);
+                    this.goBack();
+                }
+            });
     }
 
     goBack(): void {
         this.location.back();
+    }
+
+    onChange(file: File) {
+        if (file && (file.type === 'image/png' || file.type === 'image/jpeg'
+            || file.type === 'image/jpg') && file.size < 2000000) {
+            this.file = file;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = event => {
+                this.imageUrl = reader.result;
+            };
+        } else {
+            this.form.get('file').reset();
+        }
     }
 
 }

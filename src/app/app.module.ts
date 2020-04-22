@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
         FilterEducationPipe,
         SnackBarComponent,
         ContactComponent,
-        SignUpComponent
+        SignUpComponent,
+        UploadFileComponent
     ],
     imports: [
         BrowserModule,

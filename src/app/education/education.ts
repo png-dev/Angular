@@ -3,4 +3,5 @@ export interface Education {
     url: string;
     title: string;
     description: string;
+    file: File;
 }

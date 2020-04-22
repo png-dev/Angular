@@ -34,4 +34,8 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/signup']);
     }
 
+    openPageUpload() {
+        this.router.navigate(['/upload']);
+    }
+
 }

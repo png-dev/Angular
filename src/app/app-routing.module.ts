@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {EducationDetailComponent} from './education-detail/education-detail.component';
 import {ContactComponent} from './contact/contact.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
+import {UploadFileComponent} from './upload-file/upload-file.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: 'educations/:education_id', component: EducationDetailComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'signup', component: SignUpComponent},
+    {path: 'upload', component: UploadFileComponent},
     {path: '**', component: NotFoundComponent},
 ];
 
