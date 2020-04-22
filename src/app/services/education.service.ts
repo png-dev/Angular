@@ -15,7 +15,6 @@ export class EducationService {
                 'Content-Type': 'application/json',
             })
     };
-
     constructor(private http: HttpClient) {
     }
 
@@ -38,7 +37,14 @@ export class EducationService {
     }
 
     updateDataEducation(education: Education): Observable<any> {
-        return this.http.put(this.educationUrl + '/' + education.id, education, this.httpOptions)
+
+        const formData = new FormData();
+        formData.append('title', education.title);
+        formData.append('description', education.description);
+        formData.append('file', education.file);
+        console.log(formData.get('description'));
+        console.log(formData.get('file'));
+        return this.http.put(this.educationUrl + '/' + education.id, formData)
             .pipe(
                 catchError(this.handleError)
             );

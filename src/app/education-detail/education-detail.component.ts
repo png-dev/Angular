@@ -55,7 +55,6 @@ export class EducationDetailComponent implements OnInit {
 
     updateEducation(education) {
         education.file = this.file;
-        console.log(education);
         this.educationService.updateDataEducation(education)
             .subscribe((res: any) => {
                 if (res?.status === 200) {
@@ -74,12 +73,13 @@ export class EducationDetailComponent implements OnInit {
             || file.type === 'image/jpg') && file.size < 2000000) {
             this.file = file;
             const reader = new FileReader();
-            reader.readAsDataURL(file);
+            const data = reader.readAsDataURL(file);
             reader.onload = event => {
                 this.imageUrl = reader.result;
             };
         } else {
-            this.form.get('file').reset();
+            this.form.get('file').setErrors({invalidFile: true});
+            this.imageUrl = '';
         }
     }
 
