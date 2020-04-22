@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <form *ngIf="education"
+        <form *ngIf="education" [formGroup]="form"
               class="text-center" style="color: #757575;">
 
             <div class="md-form">
@@ -46,46 +46,31 @@
             <div class="md-form">
                 <input type="text" id="title_id"
                        class="form-control" value="{{education.title}}"
-                       name="title" required="10" minlength="10"
-                       #title="ngModel"
-                       [(ngModel)]="education.title" [ngModelOptions]="{standalone: true}"
+                       formControlName="title"
+                       [(ngModel)]="education.title"
                        aria-describedby="materialRegisterFormPasswordHelpBlock"
                        mdbInput>
 
                 <label for="title_id">Title</label>
 
-                <div *ngIf="title.invalid && (title.dirty || title.touched)"
-                     class="alert alert-danger">
-                    <div *ngIf="title.errors.required">
-                        Title is required
-                    </div>
-                    <div *ngIf="title.errors.minlength">
-                        Title must be at least 10 characters long
-                    </div>
-
+                <div class="col alert alert-danger" role="alert"
+                     *ngIf="form.hasError('invalidTitle', ['title']) && form.get('title').touched">
+                    Invalid Username!
                 </div>
             </div>
 
             <div class="md-form">
                 <input type="text" id="description_id"
-                       name="description" required="10" minlength="10"
-                       #description="ngModel"
                        class="form-control" value="{{education.description}}"
-                       [(ngModel)]="education.description" [ngModelOptions]="{standalone: true}"
-                       aria-describedby="materialRegisterFormPasswordHelpBlock"
+                       [(ngModel)]="education.description"
+                       formControlName="description"
                        mdbInput>
                 <label for="description_id">Description</label>
-
-                <div *ngIf="description.invalid && (title.dirty || title.touched)"
-                     class="alert alert-danger">
-                    <div *ngIf="description.errors.required">
-                        Description is required
-                    </div>
-                    <div *ngIf="description.errors.minlength">
-                        Description must be at least 10 characters long
-                    </div>
-
+                <div class="col alert alert-danger" role="alert"
+                     *ngIf="form.hasError('invalidDescription', ['description']) && form.get('description').touched">
+                    Invalid Description!
                 </div>
+
             </div>
 
             <button mdbBtn type="button"
@@ -94,7 +79,8 @@
             </button>
 
             <button mdbBtn type="button"
-                    (click)="updateEducation(education)" [disabled]="title.invalid || description.invalid"
+                    (click)="updateEducation(education)"
+                    [disabled]="form.get('title').invalid || form.get('description').invalid"
                     color="primary" class="waves-light" mdbWavesEffect>Cập nhật
             </button>
 

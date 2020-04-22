@@ -74,7 +74,7 @@ export class EducationComponent implements OnInit {
                 if (result === true) {
                     this.educationService.removeDataEducation(educationId)
                         .subscribe((res: any) => {
-                            if (res.result === 1) {
+                            if (res.status === 200) {
                                 this.getEducations(this.limit, this.offset);
                                 this.snackbarService.success('Đã xóa thành công', true);
                             }

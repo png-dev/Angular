@@ -4,6 +4,9 @@ import {EducationService} from '../services/education.service';
 import {Education} from '../education/education';
 import {Location} from '@angular/common';
 import {SnackbarService} from '../services/snackbar.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {forbiddenTitle} from '../shared/title-validator';
+import {forbiddenDescription} from '../shared/description-validator';
 
 @Component({
     selector: 'app-education-detail',
@@ -13,8 +16,10 @@ import {SnackbarService} from '../services/snackbar.service';
 export class EducationDetailComponent implements OnInit {
     @Input() education: Education;
     error = '';
+    form: FormGroup;
 
     constructor(
+        private fb: FormBuilder,
         private educationService: EducationService,
         private activatedRoute: ActivatedRoute,
         private location: Location,
@@ -23,7 +28,12 @@ export class EducationDetailComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.form = this.fb.group({
+            title: ['', [Validators.required, forbiddenTitle]],
+            description: ['', [Validators.required, forbiddenDescription]],
+        });
         this.getDataEducationDetail();
+
     }
 
     getDataEducationDetail() {
@@ -38,13 +48,14 @@ export class EducationDetailComponent implements OnInit {
     }
 
     updateEducation(education) {
-        this.educationService.updateDataEducation(education)
-            .subscribe((res: any) => {
-                if (res?.result === 1) {
-                    this.snackbarService.success('Cập nhập thành công', true);
-                    this.goBack();
-                }
-            });
+        console.log(education);
+        // this.educationService.updateDataEducation(education)
+        //     .subscribe((res: any) => {
+        //         if (res?.status === 200) {
+        //             this.snackbarService.success('Cập nhập thành công', true);
+        //             this.goBack();
+        //         }
+        //     });
     }
 
     goBack(): void {

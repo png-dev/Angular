@@ -30,4 +30,8 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/contact']);
     }
 
+    openPageSignUp() {
+        this.router.navigate(['/signup']);
+    }
+
 }

@@ -8,7 +8,7 @@ import {catchError, retry} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class EducationService {
-    private educationUrl = '/api/v1/education/';
+    private educationUrl = '/api/v1/education';
     httpOptions = {
         headers: new HttpHeaders(
             {
@@ -29,7 +29,7 @@ export class EducationService {
     }
 
     getDataEducationDetail(id: string) {
-        const urlEdu = this.educationUrl + id;
+        const urlEdu = this.educationUrl + '/' + id;
         return this.http.get(urlEdu, this.httpOptions)
             .pipe(
                 retry(3),
@@ -38,7 +38,7 @@ export class EducationService {
     }
 
     updateDataEducation(education: Education): Observable<any> {
-        return this.http.put(this.educationUrl, education, this.httpOptions)
+        return this.http.put(this.educationUrl + '/' + education.id, education, this.httpOptions)
             .pipe(
                 catchError(this.handleError)
             );
@@ -46,7 +46,7 @@ export class EducationService {
 
     removeDataEducation(education: Education | string): Observable<any> {
         const id = typeof education === 'string' ? education : education.id;
-        const url = `${this.educationUrl}${id}`;
+        const url = `${this.educationUrl}/${id}`;
         return this.http.delete<Education>(url, this.httpOptions)
             .pipe(
                 catchError(this.handleError)

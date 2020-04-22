@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -17,6 +17,7 @@ import {FilterEducationPipe} from './filter-education.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { ContactComponent } from './contact/contact.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 @NgModule({
@@ -30,13 +31,15 @@ import { ContactComponent } from './contact/contact.component';
         EducationDetailComponent,
         FilterEducationPipe,
         SnackBarComponent,
-        ContactComponent
+        ContactComponent,
+        SignUpComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         MDBBootstrapModule.forRoot(),
         BrowserAnimationsModule
     ],
