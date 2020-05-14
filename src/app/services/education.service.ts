@@ -42,8 +42,6 @@ export class EducationService {
         formData.append('title', education.title);
         formData.append('description', education.description);
         formData.append('file', education.file);
-        console.log(formData.get('description'));
-        console.log(formData.get('file'));
         return this.http.put(this.educationUrl + '/' + education.id, formData)
             .pipe(
                 catchError(this.handleError)
